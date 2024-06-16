@@ -8,7 +8,8 @@ export default async function Home({ searchParams }) {
   const res = await fetch(
     `https://api.themoviedb.org/3/${
       genre === 'fetchTopRated' ? `/movie/top_rated` : `/trending/all/week`
-    }?api_key=${TMDB_API_KEY}`
+    }?api_key=${TMDB_API_KEY}`, 
+    {next: {revalidate: 10000}}
   )
 
   const data = await res.json()
